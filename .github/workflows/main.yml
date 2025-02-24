@@ -34,7 +34,7 @@ jobs:
           output-format: 'html'  # Output format (html, json, plist, etc.)
 
       - name: Upload CodeChecker results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: codechecker-results
           path: ./codechecker/reports  # Path to the CodeChecker reports
