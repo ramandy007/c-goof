@@ -1,0 +1,40 @@
+name: Static Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install codechecker
+
+      - name: Run CodeChecker
+        uses: whisperity/codechecker-action@v1
+        with:
+          build-command: 'make'  # Replace with your build command
+          checkers: 'all'  # Specify the checkers you want to run
+          output-format: 'html'  # Output format (html, json, plist, etc.)
+
+      - name: Upload CodeChecker results
+        uses: actions/upload-artifact@v2
+        with:
+          name: codechecker-results
+          path: ./codechecker/reports  # Path to the CodeChecker reports
