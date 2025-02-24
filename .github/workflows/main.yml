@@ -24,7 +24,6 @@ jobs:
  # Prepare a build
       - name: "Prepare build"
         run: |
-          mkdir -pv Build
           cd Build
           cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
         
